@@ -29,6 +29,25 @@
         height: 100%;
       }
 
+      .tablink2 {
+        background-color: gray;
+        color: white;
+        float: right;
+        border: 5px;
+        outline: none;
+        cursor: pointer;
+        padding: 8px;
+        font-size: 12px;
+        height: 12%;
+        width: 15%;
+        margin-top: 2%
+       }
+
+     .tablink2:hover {
+        background-color: #777;
+       }
+
+
         .title {
         font-size: 350%;
         margin-left: 1%;
@@ -54,7 +73,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Stadium Speak NBA Analytics</title>
+    <title>Stadium Speak Analytics</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -81,9 +100,11 @@
 
     <div id="Off-Ball Metric" class="tabcontent">
 
-      <h2 class="title2">2019-20 Off-Ball Scoring Percentiles</h2>
+      <h2 class="title2" style="float: left;">2019-20 Off-Ball Scoring Percentiles (Regular Season)</h2>
+        <button class="tablink2" onclick="openPage('2018-19 Off-Ball Metric', this, 'DimGray')">2018-19 Regular Season</button>
+        <button class="tablink2" onclick="openPage('Off-Ball Metric', this, 'DimGray')">2019-20 Regular Season</button>
 
-      <p>The "Cut Scoring" and "Off Screen Scoring" percentiles are estimated rankings of a player's per possession
+      <p style="float: left;">The "Cut Scoring" and "Off Screen Scoring" percentiles are estimated rankings of a player's per possession
           contribution in each respective area of off-ball scoring. These percentiles are calculated using publicly available tracking data and playtype data, and
           take into account volume, efficiency, player movement, and player role. <i> Note: This metric only includes perimeter players (including combo forwards).</i>
       </p>
@@ -92,17 +113,56 @@
       <div id='table-container'></div>
     </div>
 
-    <div id="Passing Metric" class="tabcontent">
-        <h2 class="title2">2019-20 Weighted Assists</h2>
+  <div id="2018-19 Off-Ball Metric" class="tabcontent">
 
-        <p>
+      <h2 class="title2" style="float: left;">2018-19 Off-Ball Scoring Percentiles (Regular Season)</h2>
+      <button class="tablink2" onclick="openPage('2018-19 Passing Metric', this, 'DimGray')">2018-19 Regular Season</button>
+      <button class="tablink2" onclick="openPage('Off-Ball Metric', this, 'DimGray')">2019-20 Regular Season</button>
+
+      <p style="float: left;">The "Cut Scoring" and "Off Screen Scoring" percentiles are estimated rankings of a player's per possession
+          contribution in each respective area of off-ball scoring. These percentiles are calculated using publicly available tracking data and playtype data, and
+          take into account volume, efficiency, player movement, and player role. <i> Note: This metric only includes perimeter players (including combo forwards).</i>
+      </p>
+
+
+      <div id='table-container4'></div>
+  </div>
+
+    <div id="Passing Metric" class="tabcontent">
+        <div>
+        <h2 class="title2" style="float: left;">2019-20 Weighted Assists (Regular Season)</h2>
+        <button class="tablink2" onclick="openPage('2018-19 Passing Metric', this, 'DimGray')">2018-19 Regular Season</button>
+            <button class="tablink2" onclick="openPage('Passing Metric', this, 'DimGray')">2019-20 Regular Season</button>
+
+    </div>
+        <p style="float: left;">
             Weighted Assists (Wght AST) is a metric that weighs a players’ assists based on the value of
             the shots they are creating. The weights are based on the points per shot of assist locations. Players who frequently assist on
               high efficiency shots  (at-rim assists, corner 3PTs assists, free throw assists) benefit from Weighted Assists.
         </p>
+
         <div id='table-container2'></div>
 
     </div>
+
+  <div id="2018-19 Passing Metric" class="tabcontent">
+      <div>
+          <h2 class="title2" style="float: left;">2018-19 Weighted Assists (Regular Season)</h2>
+          <button class="tablink2" onclick="openPage('2018-19 Passing Metric', this, 'DimGray')">2018-19 Regular Season</button>
+          <button class="tablink2" onclick="openPage('Passing Metric', this, 'DimGray')">2019-20 Regular Season</button>
+
+      </div>
+      <p style="float: left;">
+          Weighted Assists (Wght AST) is a metric that weighs a players’ assists based on the value of
+          the shots they are creating. The weights are based on the points per shot of assist locations. Players who frequently assist on
+          high efficiency shots  (at-rim assists, corner 3PTs assists, free throw assists) benefit from Weighted Assists.
+      </p>
+
+      <div id='table-container3'></div>
+
+  </div>
+
+
     <div id="Calculation" class="tabcontent">
       <h2 style="font-size:250%"> <u> How the Off-Ball Percentiles are calculated: </u></h2>
 
@@ -236,7 +296,7 @@
       }
 
       CsvToHtmlTable.init({
-        csv_path: 'data/Off-Ball Scorer Rating.csv',
+        csv_path: 'data/2019-20 Off-Ball Scorer Rating.csv',
         element: 'table-container', 
         allow_download: true,
         csv_options: {separator: ',', delimiter: '"'},
@@ -244,12 +304,29 @@
       });
 
       CsvToHtmlTable.init({
-        csv_path: 'data/assist metric.csv',
+        csv_path: 'data/2019-20 assist metric.csv',
         element: 'table-container2',
         allow_download: true,
         csv_options: {separator: ',', delimiter: '"'},
         datatables_options: {"paging": false},
       });
+
+       CsvToHtmlTable.init({
+        csv_path: 'data/2018-19 assist metric.csv',
+        element: 'table-container3',
+        allow_download: true,
+        csv_options: {separator: ',', delimiter: '"'},
+        datatables_options: {"paging": false},
+      });
+
+    CsvToHtmlTable.init({
+        csv_path: 'data/2018-19 Off-Ball Scorer Rating.csv',
+        element: 'table-container4',
+        allow_download: true,
+        csv_options: {separator: ',', delimiter: '"'},
+        datatables_options: {"paging": false},
+      });
+
 
       function openPage(pageName, elmnt, color) {
        // Hide all elements with class="tabcontent" by default */
