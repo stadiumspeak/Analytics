@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <style>
+
+      /* Style tab links */
+      .maintablink {
+        background-color: dimgray;
+        color: white;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        font-size: 17px;
+        width: 33.33%;
+       }
+
+     .maintablink:hover {
+        background-color: #777;
+       }
+
+      .tablink {
+        background-color: gray;
+        color: white;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        font-size: 17px;
+        width: 33.33%;
+       }
+
+     .tablink:hover {
+        background-color: #777;
+       }
+
+      /* Style the tab content (and add height:100% for full page content) */
+      .tabcontent {
+        color: black;
+        display: none;
+        padding: 100px 20px;
+        height: 100%;
+      }
+
+      .tablink2 {
+        background-color: gray;
+        color: white;
+        float: right;
+        border: 5px;
+        outline: none;
+        cursor: pointer;
+        padding: 8px;
+        font-size: 12px;
+        height: 12%;
+        width: 15%;
+        margin-top: 2%
+       }
+
+     .tablink2:hover {
+        background-color: #777;
+       }
+
+       .tablink3 {
+        background-color: gray;
+        color: white;
+        float: right;
+        border: 5px;
+        outline: none;
+        cursor: pointer;
+        padding: 8px;
+        font-size: 12px;
+        height: 12%;
+        width: 25%;
+        margin-top: 2%
+       }
+
+     .tablink3:hover {
+        background-color: #777;
+       }
+
+
+        .title {
+        font-size: 350%;
+        margin-left: 1%;
+        float: left;
+        }
+
+        .title2{
+        margin-top: 0%
+        font-size: 280%
+        }
+
+      .hr {
+    background-color:#000000;
+    height:5px;
+    width:100%
+}
+}
+
+
+    </style>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Stadium Speak Analytics</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div>
+    <h1 class="title">Stadium Speak NBA Analytics</h1>
+    <img src="images/logo.jpg" alt="logo" style="width:7%;height:7%;float:right">
+</div>
+
+<hr class="hr">
+
+<button class="tablink"  onclick="openOffBallPage()">Off-Ball Scoring</button>
+<button class="tablink" onclick="openPassingPage()">Optimized Assists</button>
+<button class="maintablink" onclick="openPage('Calculation', this)" id="defaultOpen">Glossary</button>
+
+
+
+<div id="Calculation" class="tabcontent">
+    <h2 style="font-size:250%"> <u> How the Off-Ball Scoring Percentiles are calculated: </u></h2>
+
+    <h3 style="font-size:190%">Basic Framework:</h3>
+
+    <p>
+        The "Cut Scoring" and "Off Screen Scoring" percentiles are built off the basic formula of:
+
+    </p>
+
+    <p>
+        <b style="font-size:120%">Points per Playtype Possession x Playtype Frequency x 100</b>
+    </p>
+
+    <p>
+        which gives us a basic idea of how many of points per 100 possessions a player contributes by either cuts or off-screens if all players
+        had equal usage rates. <i> Example: If 25% of a player's possessions are cuts and he scores 1.0 points per cut, than he'd contribute 25 points
+        per 100 of his own possessions. (Note: per 100 player possessions are instead of per 100 team possessions because the latter overvalues volume scorers.)</i>
+    </p>
+
+    <h4 style="font-size:190%">Player-Role Adjustments:</h4>
+
+    <p>
+        The playtype frequencies plugged into the above equation are adjusted from the raw frequencies found
+        on the NBA stats website. This is to account for player roles because players who spend more time off the ball will
+        naturally have higher off-ball playtype frequencies compared to players who spend less time off the ball.
+        We wouldn't expect Trae Young (who spends only 35% of an average possession
+        off the ball) to have the same amount of opportunities to cut or come off screens as Matt Thomas (who spends
+        97% of an average possession off the ball). Without adjustments, high-usage players who are also active off-the-ball (but in fewer off-ball opportunities), like Devin Booker and Jamal Murray, would be penalized for having ostensibly low off-ball activity.</p>
+    <p>
+
+        This metric accounts for this using a polynomial regression to estimate how active a player should be
+        off the ball given the proportion of an average average possession that they spend off the ball. The residuals
+        from that regression are used in place of raw playtype frequencies in the equation.
+
+
+    </p>
+
+    <h5 style="font-size:190%">Movement Adjustments:</h5>
+
+    <p>
+        The equation also includes a small movement multiplicative factor, which is essentially
+        a player's average speed on offense scaled from 1.0 to 1.3. Players who move a lot on offense can get up to a x1.3 boost on their rating, but
+        there's no subtractive penalty for having low offensive movement.
+
+        Like playtype frequencies, average offensive speed is also adjusted for player role - this time taking into
+        account a player's isolation frequency since stationary scoring tends to tank offensive speed.
+
+
+    <p>This factor is the most arbitrary part of the equation, but it plays a logical role. Cutting and
+        off-screen playtype frequencies only account for when a player ends a possession via either playtype. But there's still
+        value in a player cutting or coming off-screens - even if they aren't passed the ball. Active movement
+        puts pressure on a defense, forcing them to react. Because of that, this movement factor is aimed to give a slight boost
+        to players who are constantly in motion.
+    </p>
+
+    <h5 style="font-size:190%"> Frequency vs Efficiency</h5>
+
+    <p>
+        In the equation, frequency swings a player's percentile more than their efficiency. This should make sense
+        because players who frequently use their off-ball activity to create their own opportunities and put pressure on defenses
+        are more impactful than players who idle on the perimeter - even if the latter are more efficient.
+
+    </p>
+
+    <hr class="hr">
+
+    <h2 style="font-size:250%"> <u> How Optimized Assists are calculated: </u></h2>
+    <h6 style="font-size:190%">The Formula:</h6>
+
+    <p>
+        <b style="font-size:120%">Optimized Assists = Assists + (0.5 x 3PT Assists) + (0.773 x FT Assists) + (0.5 x Secondary Assists) + Teammate-Skill Adjuster </b>
+    </p>
+
+    <h6 style="font-size:190%">Weights:</h6>
+    <p>
+
+       3PT Assists are weighed 1.5 times the amount of a normal assist to account for the fact that three-point assists
+        yield  1.5x more points than 2-point assists.
+
+        FT Assists and Secondary Assists (neither of which are included in the regular definition of an assist) are both added into the calculation
+        of Optimized Assists. FT Assists are weighed 0.773 times that of a regular assist because a league-average pair of free throws
+        is worth 77.3% of a made 2PT field goal. Secondary Assists are weighed arbitrarily as a half a regular assist. This could
+        be updated if I find a way to extract the actual value of secondary assists relative to a regular assist.
+    </p>
+
+    <h6 style="font-size:190%">Teammate-Skill Adjuster:</h6>
+
+    <p>
+        The Teammate-Skill Adjuster is either a positive or negative number that adds "gained assists" or subtracts "lost assists" to a player's total assist.
+        This factor attempts to account for the fact that players surrounded by better teammates will have more of their
+        potential assists converted into actual assists whereas players surrounded by worse teammates will lose out on assists because their teammates can't make shots.
+        It's derived from the difference between a player's team's eFG% (excluding themselves) on the distribution of shots
+        a player assists on and the league-average eFG% (excluding their own team) on that same distribution of shots.
+    </p>
+
+
+    <h2 style="font-size:250%"> <u> How Passing Production Rating (P.P.R) is calculated: </u></h2>
+    <p> Passing Production Rating is a metric that estimates a player's passing production given their opportunities as a ball-handler.</p>
+    <h6 style="font-size:190%">The Formula:</h6>
+
+    <p>
+        <b style="font-size:120%">P.P.R. = Optimized Assists per 75 Poss / Adjusted Time Spent per Possession</b>
+    </p>
+
+    <p>
+        Adjusted Time Spent per Possession is a player's time spent handling the ball per possession adjusted for isolation
+        frequency. It is passed through a sigmoid function to adjust for extremely low-usage players.
+    </p>
+
+
+    <hr class="hr">
+
+    <h2 style="font-size:250%"> <u> References: </u></h2>
+    <p> All stats are acquired from <a href="https://www.nba.com/stats/">https://www.nba.com/stats/</a>, <a href="https://www.pbpstats.com/">https://www.pbpstats.com/</a>, and
+        <a href="http://stats.inpredictable.com/nba/ssnTeamPoss.php">http://stats.inpredictable.com/nba/ssnTeamPoss.php</a></p>
+
+    <p style="font-size:85%"> <i>Analytics by Mark Cheung</i></p>
+
+
+
+
+</div>
+
+
+
+<!-- /.container -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.csv.min.js"></script>
+<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="js/dataTables.bootstrap.js"></script>
+<script type="text/javascript" src="js/csv_to_html_table.js"></script>
+
+
+<script type="text/javascript">
+
+      function openPassingPage() {
+            window.open("passing metric.html", "_self")
+       }
+      function format_link(link){
+        if (link)
+          return "<a href='" + link + "' target='_blank'>" + link + "</a>";
+        else
+          return "";
+      }
+        function openOffBallPage() {
+            window.open("index.html", "_self")
+       }
+      function format_link(link){
+        if (link)
+          return "<a href='" + link + "' target='_blank'>" + link + "</a>";
+        else
+          return "";
+      }
+
+
+      CsvToHtmlTable.init({
+        csv_path: 'data/2019-20 Off-Ball Scorer Rating.csv',
+        element: 'table-container1',
+        allow_download: true,
+        csv_options: {separator: ',', delimiter: '"'},
+        datatables_options: {"paging": false},
+      });
+
+
+
+    CsvToHtmlTable.init({
+        csv_path: 'data/2018-19 Off-Ball Scorer Rating.csv',
+        element: 'table-container2',
+        allow_download: true,
+        csv_options: {separator: ',', delimiter: '"'},
+        datatables_options: {"paging": false},
+      });
+
+
+      function openPage(pageName, elmnt, color) {
+       // Hide all elements with class="tabcontent" by default */
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      // Remove the background color of all tablinks/buttons
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].style.backgroundColor = "";
+      }
+
+      // Show the specific tab content
+      document.getElementById(pageName).style.display = "block";
+
+      // Add the specific color to the button used to open the tab content
+      elmnt.style.backgroundColor = color;
+      }
+
+      // Get the element with id="defaultOpen" and click on it
+      document.getElementById("defaultOpen").click();
+    </script>
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <style>
+
+      /* Style tab links */
+       .maintablink {
+        background-color: dimgray;
+        color: white;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        font-size: 17px;
+        width: 33.33%;
+       }
+
+     .maintablink:hover {
+        background-color: #777;
+       }
+
+
+      .tablink {
+        background-color: gray;
+        color: white;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        font-size: 17px;
+        width: 33.33%;
+       }
+
+     .tablink:hover {
+        background-color: #777;
+       }
+
+      /* Style the tab content (and add height:100% for full page content) */
+      .tabcontent {
+        color: black;
+        display: none;
+        padding: 100px 20px;
+        height: 100%;
+      }
+
+      .tablink2 {
+        background-color: gray;
+        color: white;
+        float: right;
+        border: 5px;
+        outline: none;
+        cursor: pointer;
+        padding: 8px;
+        font-size: 12px;
+        height: 12%;
+        width: 15%;
+        margin-top: 2%
+       }
+
+     .tablink2:hover {
+        background-color: #777;
+       }
+
+       .tablink3 {
+        background-color: gray;
+        color: white;
+        float: right;
+        border: 5px;
+        outline: none;
+        cursor: pointer;
+        padding: 8px;
+        font-size: 12px;
+        height: 12%;
+        width: 25%;
+        margin-top: 2%
+       }
+
+     .tablink3:hover {
+        background-color: #777;
+       }
+
+
+        .title {
+        font-size: 350%;
+        margin-left: 1%;
+        float: left;
+        }
+
+        .title2{
+        margin-top: 0%
+        font-size: 280%
+        }
+
+      .hr {
+    background-color:#000000;
+    height:5px;
+    width:100%
+}
+}
+
+
+    </style>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Stadium Speak Analytics</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div>
+    <h1 class="title">Stadium Speak NBA Analytics</h1>
+    <img src="images/logo.jpg" alt="logo" style="width:7%;height:7%;float:right">
+</div>
+
+<hr class="hr">
+
+<button class="tablink" onclick="openOffBallPage()">Off-Ball Scoring</button>
+<button class="maintablink" onclick="openPage('Passing Metric', this, 'DimGray')" id="defaultOpen">Optimized Assists</button>
+<button class="tablink" onclick="openGlossaryPage()">Glossary</button>
+
+<div id="Passing Metric" class="tabcontent">
+    <div>
+        <h2 class="title2" style="float: left;">2019-20 Optimized Assists (Regular Season)</h2>
+
+        <button class="tablink2" style="background-color: dimgray;" onclick="openPage('Passing Metric', this, 'DimGray')">2019-20 Regular Season</button>
+
+    </div>
+    <p style="float: left;">
+        Optimized Assists (Opt. AST) is a metric that test123test123ptimized Assists (Opt. AST) is a metric that test123test123ptimized Assists (Opt. AST) is a metric that test123test123ptimized Assists (Opt. AST) is a metric that test123test123ptimized Assists (Opt. AST) is a metric that test123test123
+    </p>
+
+    <button class="tablink3"  onclick="openPage('2019-20 Passing Metric Bigmen', this)">Bigmen</button>
+    <button class="tablink3" onclick="openPage('2019-20 Passing Metric Wings', this)">Wings</button>
+    <button class="tablink3" onclick="openPage('2019-20 Passing Metric Guards', this)">Guards</button>
+    <button class="tablink3" style="background-color: dimgray;" onclick="openPage('Passing Metric', this)">All Players</button>
+
+
+    <div id='table-container1'></div>
+</div>
+
+
+<div id="2019-20 Passing Metric Guards" class="tabcontent">
+    <div>
+        <h2 class="title2" style="float: left;">2019-20 Optimized Assists (Regular Season)</h2>
+        <button class="tablink2" style="background-color: dimgray;" onclick="openPage('Passing Metric', this, 'DimGray')">2019-20 Regular Season</button>
+
+    </div>
+    <p style="float: left;">
+        Weighted Assists (Wght AST) is a metric that weighs a players’ assists based on the value of
+        the shots they are creating. The weights are based on the points per shot of assist locations. Players who frequently assist on
+        high efficiency shots  (at-rim assists, corner 3PTs assists, free throw assists) benefit from Weighted Assists.
+    </p>
+
+    <button class="tablink3" onclick="openPage('2019-20 Passing Metric Bigmen', this)">Bigmen</button>
+    <button class="tablink3" onclick="openPage('2019-20 Passing Metric Wings', this)">Wings</button>
+    <button class="tablink3" style="background-color: dimgray;" onclick="openPage('2019-20 Passing Metric Guards', this)">Guards</button>
+    <button class="tablink3" onclick="openPage('Passing Metric', this)">All Players</button>
+
+    <div id='table-container11'></div>
+
+</div>
+
+
+<div id="2019-20 Passing Metric Wings" class="tabcontent">
+    <div>
+        <h2 class="title2" style="float: left;">2019-20 Optimized Assists (Regular Season)</h2>
+        <button class="tablink2" style="background-color: dimgray;" onclick="openPage('Passing Metric', this, 'DimGray')">2019-20 Regular Season</button>
+
+    </div>
+    <p style="float: left;">
+        Weighted Assists (Wght AST) is a metric that weighs a players’ assists based on the value of
+        the shots they are creating. The weights are based on the points per shot of assist locations. Players who frequently assist on
+        high efficiency shots  (at-rim assists, corner 3PTs assists, free throw assists) benefit from Weighted Assists.
+    </p>
+
+    <button class="tablink3" onclick="openPage('2019-20 Passing Metric Bigmen', this)">Bigmen</button>
+    <button class="tablink3" style="background-color: dimgray;" onclick="openPage('2019-20 Passing Metric Wings', this)">Wings</button>
+    <button class="tablink3" onclick="openPage('2019-20 Passing Metric Guards', this)">Guards</button>
+    <button class="tablink3" onclick="openPage('Passing Metric', this)">All Players</button>
+
+
+    <div id='table-container12'></div>
+</div>
+
+<div id="2019-20 Passing Metric Bigmen" class="tabcontent">
+    <div>
+        <h2 class="title2" style="float: left;">2019-20 Optimized Assists (Regular Season)</h2>
+
+        <button class="tablink2" style="background-color: dimgray;" onclick="openPage('Passing Metric', this, 'DimGray')">2019-20 Regular Season</button>
+
+    </div>
+    <p style="float: left;">
+        Weighted Assists (Wght AST) is a metric that weighs a players’ assists based on the value of
+        the shots they are creating. The weights are based on the points per shot of assist locations. Players who frequently assist on
+        high efficiency shots  (at-rim assists, corner 3PTs assists, free throw assists) benefit from Weighted Assists.
+    </p>
+
+    <button class="tablink3" style="background-color: dimgray;" onclick="openPage('2019-20 Passing Metric Bigmen', this)">Bigmen</button>
+    <button class="tablink3" onclick="openPage('2019-20 Passing Metric Wings', this)">Wings</button>
+    <button class="tablink3" onclick="openPage('2019-20 Passing Metric Guards', this)">Guards</button>
+    <button class="tablink3" onclick="openPage('Passing Metric', this)">All Players</button>
+
+
+    <div id='table-container13'></div>
+</div>
+
+
+
+
+
+
+<!-- /.container -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.csv.min.js"></script>
+<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="js/dataTables.bootstrap.js"></script>
+<script type="text/javascript" src="js/csv_to_html_table.js"></script>
+
+
+<script type="text/javascript">
+
+      function openOffBallPage() {
+            window.open("index.html", "_self")
+       }
+      function format_link(link){
+        if (link)
+          return "<a href='" + link + "' target='_blank'>" + link + "</a>";
+        else
+          return "";
+      }
+
+      function openGlossaryPage() {
+            window.open("glossary.html", "_self")
+       }
+      function format_link(link){
+        if (link)
+          return "<a href='" + link + "' target='_blank'>" + link + "</a>";
+        else
+          return "";
+      }
+
+
+
+      CsvToHtmlTable.init({
+        csv_path: 'data/2019-20 all-players assist metric.csv',
+        element: 'table-container1',
+        allow_download: true,
+        csv_options: {separator: ',', delimiter: '"'},
+        datatables_options: {"paging": false},
+      });
+      CsvToHtmlTable.init({
+        csv_path: 'data/2019-20 guards assist metric.csv',
+        element: 'table-container11',
+        allow_download: true,
+        csv_options: {separator: ',', delimiter: '"'},
+        datatables_options: {"paging": false},
+      });
+
+      CsvToHtmlTable.init({
+        csv_path: 'data/2019-20 wings assist metric.csv',
+        element: 'table-container12',
+        allow_download: true,
+        csv_options: {separator: ',', delimiter: '"'},
+        datatables_options: {"paging": false},
+      });
+
+       CsvToHtmlTable.init({
+        csv_path: 'data/2019-20 bigmen assist metric.csv',
+        element: 'table-container13',
+        allow_download: true,
+        csv_options: {separator: ',', delimiter: '"'},
+        datatables_options: {"paging": false},
+      });
+
+       CsvToHtmlTable.init({
+        csv_path: 'data/2018-19 assist metric.csv',
+        element: 'table-container3',
+        allow_download: true,
+        csv_options: {separator: ',', delimiter: '"'},
+        datatables_options: {"paging": false},
+      });
+
+
+      function openPage(pageName, elmnt, color) {
+       // Hide all elements with class="tabcontent" by default */
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      // Remove the background color of all tablinks/buttons
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].style.backgroundColor = "";
+      }
+
+      // Show the specific tab content
+      document.getElementById(pageName).style.display = "block";
+
+      // Add the specific color to the button used to open the tab content
+      elmnt.style.backgroundColor = color;
+      }
+
+      // Get the element with id="defaultOpen" and click on it
+      document.getElementById("defaultOpen").click();
+    </script>
+</body>
+</html>
