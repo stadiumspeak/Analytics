@@ -151,7 +151,7 @@
     <p>
         which gives us a basic idea of how many of points per 100 possessions a player contributes by either cuts or off-screens if all players
         had equal usage rates. <i> Example: If 25% of a player's possessions are cuts and he scores 1.0 points per cut, than he'd contribute 25 points
-        per 100 of his own possessions. (Note: per 100 player possessions are instead of per 100 team possessions because the latter overvalues volume scorers.)</i>
+        per 100 of his own possessions.</i>
     </p>
 
     <h4 style="font-size:190%">Player-Role Adjustments:</h4>
@@ -183,11 +183,11 @@
         account a player's isolation frequency since stationary scoring tends to tank offensive speed.
 
 
-    <p>This factor is the most arbitrary part of the equation, but it plays a logical role. Cutting and
-        off-screen playtype frequencies only account for when a player ends a possession via either playtype. But there's still
+    <p>This factor is the most arbitrary part of the equation - which is why I went with a more conservative range for the scale (1 to 1.3). But that doesn't mean
+    there's no reasoning behind it. Cutting an  off-screen playtype frequencies only account for when a player ends a possession via either playtype. But there's still
         value in a player cutting or coming off-screens - even if they aren't passed the ball. Active movement
         puts pressure on a defense, forcing them to react. Because of that, this movement factor is aimed to give a slight boost
-        to players who are constantly in motion.
+        to players who are constantly in motion. I find that that the results with this factor appease the eye test more than the results without this factor.
     </p>
 
     <h5 style="font-size:190%"> Frequency vs Efficiency</h5>
@@ -202,6 +202,16 @@
     <hr class="hr">
 
     <h2 style="font-size:250%"> <u> How Optimized Assists are calculated: </u></h2>
+    <h3 style="font-size:190%">Basic Framework:</h3>
+
+    <p>
+        The traditional assists stat suffers from the same achilles heel that has caused FG% to succumb to better efficiency metrics like TS%.
+        Assists don't account for the difference in value between three-point assists and two-point assists, and are also blind to free-throw assists.
+        Optimized Assists redefines traditional assists to provide more context on the types of shots a player is assisting on.
+
+    </p>
+
+    <p>
     <h6 style="font-size:190%">The Formula:</h6>
 
     <p>
@@ -211,8 +221,7 @@
     <h6 style="font-size:190%">Weights:</h6>
     <p>
 
-       3PT Assists are weighed 1.5 times the amount of a normal assist to account for the fact that three-point assists
-        yield  1.5x more points than 2-point assists.
+       3PT Assists are weighed 1.5 times the amount of a 2PT assist to account for the fact that three points are worth 1.5x more than two points.
 
         FT Assists and Secondary Assists (neither of which are included in the regular definition of an assist) are both added into the calculation
         of Optimized Assists. FT Assists are weighed 0.773 times that of a regular assist because a league-average pair of free throws
@@ -232,7 +241,11 @@
 
 
     <h2 style="font-size:250%"> <u> How Passing Production Rating (P.P.R) is calculated: </u></h2>
-    <p> Passer Production Rating (P.P.R.) is a metric that attempts to quantify a player's production as a passer given then amount of time the spend on the ball per possession</p>
+    <h3 style="font-size:190%">Basic Framework:</h3>
+    <p> Passer Production Rating (P.P.R.) is a metric that estimates how many Optimized Assists a player
+        is generating per possession relative to the amount of time they spend on the ball per possession. P.P.R. is intended to gauge a player's passing production, not to assign
+        grades for passing skill or playmaking skill (although, that doesn't mean there isn't a relationship between P.P.R. and passing/playmaking skill). </p>
+
     <h6 style="font-size:190%">The Formula:</h6>
 
     <p>
@@ -240,8 +253,9 @@
     </p>
 
     <p>
-        Adjusted Time Spent per Possession is a player's time spent handling the ball per possession adjusted for isolation
-        frequency. It is then passed through a sigmoid function to adjust for extremely low-usage players.
+        Adjusted Time Spent per Possession is a player's time spent handling the ball per possession, slightly adjusted for isolation
+        frequency (to account for players that are asked to self-create offense for their team and the time-of-poss repercussions of that responsibility).
+        It is then passed through a sigmoid function to adjust for extremely low-usage players who spend close to no time on the ball.
     </p>
 
 
