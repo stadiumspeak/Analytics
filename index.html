@@ -12,8 +12,8 @@
         border: none;
         outline: none;
         cursor: pointer;
-        padding: 14px 16px;
-        font-size: 17px;
+        padding: 1% 1%;
+        font-size: 125%;
         width: 33.33%;
        }
 
@@ -28,8 +28,8 @@
         border: none;
         outline: none;
         cursor: pointer;
-        padding: 14px 16px;
-        font-size: 17px;
+        padding: 1% 1%;
+        font-size: 125%;
         width: 33.33%;
        }
 
@@ -48,15 +48,14 @@
       .tablink2 {
         background-color: gray;
         color: white;
-        float: right;
-        border: 5px;
+        border: none;
         outline: none;
         cursor: pointer;
-        padding: 8px;
-        font-size: 12px;
-        height: 12%;
-        width: 15%;
-        margin-top: 2%
+        padding: 0.75%;
+        font-size: 85%;
+        height: 15%;
+        width: 20%;
+        margin-top: 0%
        }
 
      .tablink2:hover {
@@ -115,10 +114,11 @@
     <button class="tablink" onclick="openGlossaryPage()">Glossary</button>
 
     <div id="Off-Ball Metric" class="tabcontent">
-
-      <h2 class="title2" style="float: left;">2019-20 Off-Ball Scoring Percentiles (Regular Season)</h2>
-        <button class="tablink2" onclick="openPage('2018-19 Off-Ball Metric', this)">2018-19 Regular Season</button>
         <button class="tablink2" style="background-color: dimgray;" onclick="openPage('Off-Ball Metric', this)">2019-20 Regular Season</button>
+        <button class="tablink2" onclick="openPage('2018-19 Off-Ball Metric', this)">2018-19 Regular Season</button>
+
+
+      <h2 class="title2">2019-20 Off-Ball Scoring Percentiles (Regular Season)</h2>
 
       <p style="float: left;">The "Cut Scoring" and "Off Screen Scoring" percentiles are estimated rankings of a player's per possession
           contribution in each respective area of off-ball scoring. These percentiles are calculated using publicly available tracking data and playtype data, and
@@ -131,9 +131,11 @@
 
   <div id="2018-19 Off-Ball Metric" class="tabcontent">
 
-      <h2 class="title2" style="float: left;">2018-19 Off-Ball Scoring Percentiles (Regular Season)</h2>
-      <button class="tablink2" style="background-color: dimgray;" onclick="openPage('2018-19 Off-Ball Metric', this)">2018-19 Regular Season</button>
       <button class="tablink2" onclick="openPage('Off-Ball Metric', this)">2019-20 Regular Season</button>
+      <button class="tablink2" style="background-color: dimgray;" onclick="openPage('2018-19 Off-Ball Metric', this)">2018-19 Regular Season</button>
+
+      <h2 class="title2">2018-19 Off-Ball Scoring Percentiles (Regular Season)</h2>
+
 
       <p style="float: left;">The "Cut Scoring" and "Off Screen Scoring" percentiles are estimated rankings of a player's per possession
           contribution in each respective area of off-ball scoring. These percentiles are calculated using publicly available tracking data and playtype data, and
